@@ -36,7 +36,7 @@ export class second extends Component {
         <div className = "loginpage">
         
         <div class="container">
-        <div class="heading">MAYBANK LIBRARY</div>
+        <div class="heading">MAY LIBRARY</div>
         <form>
             <div class="form-group">
                 <label style={{margin:"5px"}} for="username">Username  </label>
