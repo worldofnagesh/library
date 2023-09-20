@@ -47,7 +47,7 @@ export class ForgotPassword extends Component {
         <div class="container">
         <PageHeading/>
         <form>
-           <div  className="SubHeading">
+           <div style={{marginBottom:"40px",marginTop:"30px" }}className="SubHeading">
            <p>Trouble logging in?</p>
            </div>
             <div class="form-group">
@@ -73,15 +73,6 @@ export class ForgotPassword extends Component {
             <div class="form-group">
                 <button style={{backgroundColor:"#6492ea", border:"0", width:"120px"}} type="submit" onClick={this.login}>Reset Password</button>
             </div>
-            {/* <div class="form-group2">
-                <a href=" " class="link">Fogot password?</a>
-            </div>
-            <div class="form-group2">
-                Don't have an account?<a class="link" href='http://localhost:3000/second'><u>Register</u></a>
-            </div>
-            <div class="form-group2">
-                Admin?<a href=" " class="link"><u>Login</u></a>
-            </div> */}
 
         </form>
         
