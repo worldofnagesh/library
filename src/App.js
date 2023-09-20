@@ -8,8 +8,11 @@ import {
   Outlet,
   BrowserRouter
 } from "react-router-dom";
-import First from './components/first/first';
-import Second from './components/second/second'
+import Register from './components/Register/Register';
+import Login from './components/Login/Login'
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import AdminLogin from './components/AdminLogin/AdminLogin';
+import AddBook from './components/AddBook/AddBook';
 
 function App() {
   return (
@@ -17,8 +20,11 @@ function App() {
       <BrowserRouter>
     
     <Routes>
-      <Route path="/" element={<First />} />
-      <Route path="/second" element={<Second />} />``
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+      <Route path='/adminlogin' element={<AdminLogin/>}/>
+      <Route path='/addbook' element={<AddBook/>}/>
       {/* {/* <Route exact path="/recovery-password" element={<RecoveryPassword/>}/>
       <Route path="*" element={<NotFound/>}/> */}
     </Routes>

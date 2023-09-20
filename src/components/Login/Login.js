@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import './second.scss'
+import './Login.scss'
 import { withRouter } from '../../withRouter';
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import * as firstActions from "../../store/first/actions";
+import PageHeading from '../PageHeading';
 
-export class second extends Component {
+export class Login extends Component {
     changeUserName(event) {  
         this.setState({  
             userName: event.target.value
@@ -18,6 +16,7 @@ export class second extends Component {
       }
       login = () => {
         if (this.state.userName=="MAYBANK" && this.state.passWord=="LIBRARY") {
+          alert("Credentials...")
           this.props.navigate("/")
         } else {
           alert("Invalid Credentials...")
@@ -36,7 +35,7 @@ export class second extends Component {
         <div className = "loginpage">
         
         <div class="container">
-        <div class="heading">MAY LIBRARY</div>
+        <PageHeading></PageHeading>
         <form>
             <div class="form-group">
                 <label style={{margin:"5px"}} for="username">Username  </label>
@@ -52,20 +51,21 @@ export class second extends Component {
                 <button style={{backgroundColor:"#6492ea", border:"0", width:"70px"}} type="submit" onClick={this.login}>Login</button>
             </div>
             <div class="form-group2">
-                <a href=" " class="link">Fogot password?</a>
+                <a class="link" href="http://localhost:3000/forgotpassword">Fogot password?</a>
             </div>
             <div class="form-group2">
-                Don't have an account?<a class="link" href=''><u>Register</u></a>
+                Don't have an account?<a class="link" href='http://localhost:3000/register'><u>Register</u></a>
             </div>
             <div class="form-group2">
-                Admin?<a href=" " class="link"><u>Login</u></a>
+                Admin?<a href="http://localhost:3000/adminlogin" class="link"><u>Login</u></a>
             </div>
 
         </form>
+        
          </div>
         </div>
       
     </div>;
     }
 }
-export default withRouter(second);
+export default withRouter(Login);

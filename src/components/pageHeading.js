@@ -1,2 +1,10 @@
 import React, {Component} from 'react';
-import { withRouter } from '../../withRouter';
+
+const PageHeading = () => {
+    return (
+      <>
+        <div class="PageHeading">MAYBANK LIBRARY</div>
+      </>
+    );
+  };
+  export default PageHeading;
