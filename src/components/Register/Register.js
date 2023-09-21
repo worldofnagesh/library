@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from '../../withRouter';
 import PageHeading from '../PageHeading';
+import StateDropdown from '../StateDropdown';
 
 export class Register extends Component {
     changeIdNumber(event) {  
@@ -59,7 +60,7 @@ export class Register extends Component {
         <PageHeading/>
         
         <form>
-            <div style={{marginBottom:"2px",marginTop:"-20px"}} className="SubHeading">
+            <div style={{marginBottom:"2px",marginTop:"-30px"}} className="SubHeading">
             <p>Register to borrow books</p>
             </div>
             <div class="form-group">
@@ -84,10 +85,13 @@ export class Register extends Component {
             </div>
             <div class="form-group">
               <label style={{margin:"5px" , paddingLeft:"20px"}} for="gender">Gender</label>
-              <input type="radio" id="html" name="fav_language" value="HTML"/>
-              <label for="html">HTML</label>
-              <input type="radio" id="css" name="fav_language" value="CSS"/>
-              <label for="css">CSS</label>
+              <input type="radio" id="male" name="male" value="male"/>
+              <label for="male">Male</label>
+              <input type="radio" id="female" name="female" value="female"/>
+              <label for="female">Female</label>
+            </div>
+            <div class="form-group">
+              <StateDropdown></StateDropdown>
             </div>
             <div class="form-group">
                 <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label>
