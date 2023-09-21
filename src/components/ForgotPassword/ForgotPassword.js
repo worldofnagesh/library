@@ -24,9 +24,9 @@ export class ForgotPassword extends Component {
         });  
       }
     login = () => {
-        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2023-09-20" && this.state.passWord==this.state.confirmPassword) {
-          alert("Sucessfully updated")
-          this.props.navigate("/addbook")
+        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2001-01-01" && this.state.passWord==this.state.confirmPassword) {
+          alert("Password Updated")
+          this.props.navigate("/")
         } else {
           alert("Invalid Credentials...")
         }

@@ -34,8 +34,8 @@ export class Register extends Component {
         });  
       }
     login = () => {
-        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2023-09-20" && this.state.passWord==this.state.confirmPassword) {
-          alert("Sucessfully updated")
+        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2001-01-01" && this.state.passWord==this.state.confirmPassword) {
+          alert("Successfully Registered")
           this.props.navigate("/")
         } else {
           alert("Invalid Credentials...")
@@ -63,24 +63,31 @@ export class Register extends Component {
             <p>Register to borrow books</p>
             </div>
             <div class="form-group">
-                <label style={{margin:"5px" , paddingLeft:"80px"}} for="idnumber">ID Number  </label>
+                <label style={{margin:"5px" , paddingLeft:"60px"}} for="idnumber">ID Number  </label>
                 <input type="text" id="idnumber" name="idnumber" value={this.state.idNumber} 
                  onChange={this.changeIdNumber.bind(this)} required/>
             </div>
             <div class="form-group">
-                <label style={{margin:"5px" , paddingLeft:"80px"}} for="fullname">Full Name  </label>
+                <label style={{margin:"5px" , paddingLeft:"65px"}} for="fullname">Full Name  </label>
                 <input type="text" id="fullname" name="fullname" value={this.state.fullName} 
                  onChange={this.changeFullName.bind(this)} required/>
             </div>
             <div class="form-group">
-                <label style={{margin:"5px" , paddingLeft:"80px"}} for="email">Email  </label>
+                <label style={{margin:"5px" , paddingLeft:"100px"}} for="email">Email  </label>
                 <input type="text" id="email" name="email" value={this.state.email} 
                  onChange={this.changeEmail.bind(this)} required/>
             </div>
             <div class="form-group">
-               <label style={{margin:"5px" , paddingLeft:"75px"}} for="dateofbirth">Date of Birth</label>
+               <label style={{margin:"5px" , paddingLeft:"45px"}} for="dateofbirth">Date of Birth</label>
                <input  style={{width:"160px"}} type="date" id='dateofbirth' name='dateofbirth' value={this.state.dateOfBirth}
                 onChange={this.changeDateOfBirth.bind(this)} required/>
+            </div>
+            <div class="form-group">
+              <label style={{margin:"5px" , paddingLeft:"20px"}} for="gender">Gender</label>
+              <input type="radio" id="html" name="fav_language" value="HTML"/>
+              <label for="html">HTML</label>
+              <input type="radio" id="css" name="fav_language" value="CSS"/>
+              <label for="css">CSS</label>
             </div>
             <div class="form-group">
                 <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label>
@@ -93,7 +100,7 @@ export class Register extends Component {
                  onChange={this.changeConfirmPassword.bind(this)} required/>
             </div>
             <div class="form-group">
-                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px"}} type="submit" onClick={this.first}>Register</button>
+                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px"}} type="submit" onClick={this.login}>Register</button>
             </div>
 
         </form>

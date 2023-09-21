@@ -16,7 +16,7 @@ export class Login extends Component {
       }
       login = () => {
         if (this.state.userName=="MAYBANK" && this.state.passWord=="LIBRARY") {
-          alert("Credentials...")
+          alert("Login Sucessful")
           this.props.navigate("/")
         } else {
           alert("Invalid Credentials...")

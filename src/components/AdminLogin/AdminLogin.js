@@ -15,7 +15,7 @@ export class AdminLogin extends Component {
       }
       AddBook = () => {
         if (this.state.userName=="MAYBANK" && this.state.passWord=="ADMIN") {
-          alert("Credentials Add Book")
+          alert("Login Successfully, Add Book")
           this.props.navigate("/addbook")
         } else {
           alert("Invalid Credentials...")
