@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from '../../withRouter';
 import PageHeading from '../PageHeading';
 import StateDropdown from '../StateDropdown';
+import GenderRadioButtons from '../Gender';
 
 export class Register extends Component {
     changeIdNumber(event) {  
@@ -24,7 +25,12 @@ export class Register extends Component {
             dateOfBirth: event.target.value
         })
       }
-    changePassword(event) {  
+      handleGenderChange(event){
+        this.setState({
+          selectedGender: event.target.value
+        });
+      };
+    changePassword(event) {   
         this.setState({  
             passWord: event.target.value
         });  
@@ -34,8 +40,8 @@ export class Register extends Component {
             confirmPassword: event.target.value
         });  
       }
-    login = () => {
-        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2001-01-01" && this.state.passWord==this.state.confirmPassword) {
+    Register = () => {
+        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2001-01-01" && this.state.passWord==this.state.confirmPassword && this.state.selectedGender=="male") {
           alert("Successfully Registered")
           this.props.navigate("/")
         } else {
@@ -44,14 +50,15 @@ export class Register extends Component {
       }
     constructor(props) {
         super(props);
-        this.login=this.login.bind(this);
+        this.Register=this.Register.bind(this);
         this.state = {
             idNumber:'',
             fullName:'',
             email:'',
             dateOfBirth:'',
             passWord:'',
-            confirmPassword:''
+            confirmPassword:'',
+            selectedGender:''    
         };
     }
     render() {
@@ -60,7 +67,7 @@ export class Register extends Component {
         <PageHeading/>
         
         <form>
-            <div style={{marginBottom:"2px",marginTop:"-30px"}} className="SubHeading">
+            <div style={{marginBottom:"2px",marginTop:"-20px"}} className="SubHeading">
             <p>Register to borrow books</p>
             </div>
             <div class="form-group">
@@ -85,10 +92,9 @@ export class Register extends Component {
             </div>
             <div class="form-group">
               <label style={{margin:"5px" , paddingLeft:"20px"}} for="gender">Gender</label>
-              <input type="radio" id="male" name="male" value="male"/>
-              <label for="male">Male</label>
-              <input type="radio" id="female" name="female" value="female"/>
-              <label for="female">Female</label>
+              <label >
+                <input type="radio"  value="male" onChange={this.handleGenderChange.bind(this)} name="gender"/>Male
+              <input type="radio"  value="female" onChange={this.handleGenderChange.bind(this)} name="gender"/>Female</label>
             </div>
             <div class="form-group">
               <StateDropdown></StateDropdown>
@@ -104,7 +110,7 @@ export class Register extends Component {
                  onChange={this.changeConfirmPassword.bind(this)} required/>
             </div>
             <div class="form-group">
-                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px"}} type="submit" onClick={this.login}>Register</button>
+                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px", height:"25px"}} type="submit" onClick={this.Register}>Register</button>
             </div>
 
         </form>

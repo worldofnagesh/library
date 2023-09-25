@@ -17,7 +17,7 @@ export class Login extends Component {
       login = () => {
         if (this.state.userName=="MAYBANK" && this.state.passWord=="LIBRARY") {
           alert("Login Sucessful")
-          this.props.navigate("/")
+          this.props.navigate("/Home")
         } else {
           alert("Invalid Credentials...")
         }
@@ -46,9 +46,9 @@ export class Login extends Component {
                 <label style={{margin:"5px"}} for="password">Password  </label>
                 <input type="password" id="password" name="password" value={this.state.passWord}
                    onChange={this.changePassword.bind(this)} required/>
-            </div>
+            </div >
             <div class="form-group">
-                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px"}} type="submit" onClick={this.login}>Login</button>
+                <button style={{backgroundColor:"#6492ea", border:"0", width:"70px", height:"25px"}} type="submit" onClick={this.login}>Login</button>
             </div>
             <div class="form-group2">
                 <a class="link" href="http://localhost:3000/forgotpassword">Fogot password?</a>

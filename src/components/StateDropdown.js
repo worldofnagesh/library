@@ -39,9 +39,9 @@ const StateDropdown = () => {
   };
 
   return (
-    <div>
-      <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">State </label>
-      <select value={selectedState} onChange={handleStateChange}>
+    <div class="form-group">
+      <label style={{margin:"5px" ,paddingLeft:"90px"}} for="state">State</label>
+      <select style={{width:"160px"}}  value={selectedState} onChange={handleStateChange}>
         <option value="">Select a state</option>
         {indianStates.map((state, index) => (
           <option key={index} value={state}>
@@ -55,3 +55,4 @@ const StateDropdown = () => {
 };
 
 export default StateDropdown;
+<label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label>

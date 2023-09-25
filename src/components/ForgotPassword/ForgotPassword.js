@@ -71,7 +71,7 @@ export class ForgotPassword extends Component {
                  onChange={this.changeConfirmPassword.bind(this)} required/>
             </div>
             <div class="form-group">
-                <button style={{backgroundColor:"#6492ea", border:"0", width:"120px"}} type="submit" onClick={this.login}>Reset Password</button>
+                <button style={{backgroundColor:"#6492ea", border:"0", width:"120px", height:"25px",}} type="submit" onClick={this.login}>Reset Password</button>
             </div>
 
         </form>
