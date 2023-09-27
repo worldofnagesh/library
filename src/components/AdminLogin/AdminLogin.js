@@ -31,21 +31,21 @@ export class AdminLogin extends Component {
     }
     render() {
       return <div className="component-first">
-        <div class="container">
+        <div className="container">
         <PageHeading/>
         <form>
            
-            <div class="form-group">
-                <label style={{margin:"5px"}} for="username">Username  </label>
+            <div className="form-group">
+                <label style={{margin:"5px"}}>Username  </label>
                 <input type="text" id="username" name="username" value={this.state.userName} 
                  onChange={this.changeUserName.bind(this)} required/>
             </div>
-            <div class="form-group">
-                <label style={{margin:"5px"}} for="password">Password  </label>
+            <div className="form-group">
+                <label style={{margin:"5px"}}>Password  </label>
                 <input type="password" id="password" name="password" value={this.state.passWord}
                    onChange={this.changePassword.bind(this)} required/>
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 <button style={{backgroundColor:"#6492ea", border:"0", width:"100px"}} type="submit" onClick={this.AddBook}>Admin Login</button>
             </div>
             {/* <div class="form-group2">

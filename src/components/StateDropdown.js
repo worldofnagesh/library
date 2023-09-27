@@ -32,16 +32,16 @@ const StateDropdown = () => {
     'West Bengal',
   ];
 
-  const [selectedState, setSelectedState] = useState('');
+  const [state, setstate] = useState('');
 
   const handleStateChange = (e) => {
-    setSelectedState(e.target.value);
+    setstate(e.target.value);
   };
 
   return (
     <div class="form-group">
       <label style={{margin:"5px" ,paddingLeft:"90px"}} for="state">State</label>
-      <select style={{width:"160px"}}  value={selectedState} onChange={handleStateChange}>
+      <select style={{width:"160px"}}  value={state} onChange={handleStateChange}>
         <option value="">Select a state</option>
         {indianStates.map((state, index) => (
           <option key={index} value={state}>
@@ -49,10 +49,10 @@ const StateDropdown = () => {
           </option>
         ))}
       </select>
-      {/* <p>Selected State: {selectedState}</p> */}
+      {/* <p>Selected State: {state}</p> */}
     </div>
   );
 };
 
 export default StateDropdown;
-<label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label>
+{/* <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label> */}

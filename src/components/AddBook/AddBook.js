@@ -12,11 +12,11 @@ export class AddBook extends Component {
       this.props.navigate("/")
     }
     render() {
-      return <div className="component-first">
+      return <div class="component-first">
         <div class="container">
         <PageHeading/>
         <form>
-           <div className="SubHeading">
+           <div class="SubHeading">
            <p>Add Book</p>
            </div>
             {/* <div class="form-group">
