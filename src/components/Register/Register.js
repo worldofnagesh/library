@@ -1,73 +1,126 @@
 import React, { useState } from 'react';
 import PageHeading from '../PageHeading';
 import StateDropdown from '../StateDropdown';
-import { signUp } from '../Servers/user-servise';
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 
 
 function Register() {
-  const [formData, setFormData] = useState({
-    id: '',
-    fullName: '',
-    emailId: '',
-    dob: '',
-    gender: '',
-    password: '',
-    state: '',
-  });
-  const navigator = useNavigate();
+  const [id, setId] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [emailId, setEmailId] = useState('');
+  const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
+  const [state, setState] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
-  const changeField = (field, value) => {
-    setFormData({ ...formData, [field]: value });
+  const changeId = (event) => {
+    setId(event.target.value);
   };
-  
 
-  const handleRegister = async () => {
-    try {
-      signUp(formData).then((resp)=>{
-         console.log(resp)
-         console.log("success---")
-         navigator('/');
-         
+  const changeFullName = (event) => {
+    setFullName(event.target.value);
+  }
+  const changeEmailId = (event) => {
+    setEmailId(event.target.value);
+  };
 
-      })
-    } catch (error) {
-      alert('Invalid Credentials...');
-      navigator('/');
+  const changeDob = (event) => {
+    setDob(event.target.value);
+  }
+  const changeGender = (event) => {
+    setGender(event.target.value);
+  };
+
+  const changeState= (event) => {
+    setState(event.target.value);
+  }
+  const changePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const changeConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  }
+  const handleRegister = () => {
+
+    if ((id=="" )||(id<=99999)||(id>999999)) {
+        alert("enter a valid six digit Id")
     }
-  };
+    else if (fullName=="") {
+      alert("Please enter a full name")
+    }
+    else if (emailId=="") {
+      alert("Please enter email")
+    }
+    else if (dob=="") {
+      alert("Please enter Date of Birth ")
+    }
+    else if (gender=="") {
+      alert("Please select gender")
+    }
+    // else if (state=="") {
+    //   alert("Please select state")
+    // }
+    else if (password=="") {
+      alert("Please enter a Password")
+    }
+    else if (confirmpassword=="") {
+    alert("Please enter a Confirm Password")
+    }
+    else if (password != confirmpassword) {
+      alert("confirm password is not matching")
+    }
+    else {
+        const formDetails = {id:id,fullName:fullName, emailId:emailId, dob:dob, gender:gender, state:state, password:password};
+        console.log("posting", formDetails)
+        axios.post('http://localhost:8080/api/v1/students', formDetails)
+          .then(function () {
+                alert("Registered Successfully")
+                navigate('/');
+                console.log("valid credentials")
+          })
+          .catch(function (error) {
+            alert("Invalid Credentials,Please enter valid username or password");
+            console.log("try again",error);
+          });
+    }
+  }  
 
   return (
     <div className="component-first">
       <div className="container">
         <PageHeading />
-        <form>
+        <div>
           <div style={{ marginBottom: '2px', marginTop: '-20px' }} className="SubHeading">
             <p>Register to borrow books</p>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '60px' }} htmlFor="idnumber">
-              ID Number{' '}
+              ID Number
             </label>
             <input
-              type="text"
+              type="number"
               id="idnumber"
               name="idnumber"
-              value={formData.id}
-              onChange={(e) => changeField('id', e.target.value)}
+              placeholder='enter six digit roll number'
+              value={id}
+              onChange={changeId}
               required
             />
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '65px' }} htmlFor="fullname">
-              Full Name{' '}
+              Full Name
             </label>
             <input
               type="text"
               id="fullname"
               name="fullname"
-              value={formData.fullName}
-              onChange={(e) => changeField('fullName', e.target.value)}
+              value={fullName}
+              onChange={changeFullName}
               required
             />
           </div>
@@ -79,8 +132,8 @@ function Register() {
               type="text"
               id="email"
               name="email"
-              value={formData.emailId}
-              onChange={(e) => changeField('emailId', e.target.value)}
+              value={emailId}
+              onChange={changeEmailId}
               required
             />
           </div>
@@ -93,8 +146,8 @@ function Register() {
               type="date"
               id="dateofbirth"
               name="dateofbirth"
-              value={formData.dob}
-              onChange={(e) => changeField('dob', e.target.value)}
+              value={dob}
+              onChange={changeDob}
               required
             />
           </div>
@@ -106,14 +159,14 @@ function Register() {
               <input
                 type="radio"
                 value="male"
-                onChange={(e) => changeField('gender', e.target.value)}
+                onChange={changeGender}
                 name="gender"
               />
               Male
               <input
                 type="radio"
                 value="female"
-                onChange={(e) => changeField('gender', e.target.value)}
+                onChange={changeGender}
                 name="gender"
               />
               Female
@@ -130,8 +183,8 @@ function Register() {
               type="password"
               id="password"
               name="password"
-              value={formData.password}
-              onChange={(e) => changeField('password', e.target.value)}
+              value={password}
+              onChange={changePassword}
               required
             />
           </div>
@@ -141,10 +194,10 @@ function Register() {
             </label>
             <input
               type="text"
-              id="state"
-              name="state"
-              value={formData.state}
-              onChange={(e) => changeField('state', e.target.value)}
+              id="confirmpassword"
+              name="confirmpassword"
+              value={confirmpassword}
+              onChange={changeConfirmPassword}
               required
             />
           </div>
@@ -157,7 +210,7 @@ function Register() {
               Register
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

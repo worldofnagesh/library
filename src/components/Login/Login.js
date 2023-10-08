@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 
-function Login(props) {
+function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
