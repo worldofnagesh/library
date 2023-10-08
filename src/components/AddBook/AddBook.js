@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withRouter } from '../../withRouter';
 import PageHeading from '../PageHeading';
 
 export class AddBook extends Component {
@@ -54,4 +53,4 @@ export class AddBook extends Component {
         </div>;
     }
 }
-export default withRouter(AddBook);
+export default AddBook;

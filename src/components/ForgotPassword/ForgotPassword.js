@@ -1,84 +1,144 @@
-import React, {Component} from 'react';
-import { withRouter } from '../../withRouter';
+import React, { useState } from 'react';
 import PageHeading from '../PageHeading';
+import { useNavigate } from "react-router";
+import axios from "axios";
 
-export class ForgotPassword extends Component {
-    changeIdNumber(event) {  
-        this.setState({  
-            idNumber: event.target.value
-        });  
-      }
-      changeDateOfBirth(event){
-        this.setState({
-            dateOfBirth: event.target.value
-        })
-      }
-    changePassword(event) {  
-        this.setState({  
-            passWord: event.target.value
-        });  
-      }
-    changeConfirmPassword(event) {  
-        this.setState({  
-            confirmPassword: event.target.value
-        });  
-      }
-    login = () => {
-        if (this.state.idNumber=="123456" && this.state.passWord=="ADMIN" && this.state.dateOfBirth=="2001-01-01" && this.state.passWord==this.state.confirmPassword) {
-          alert("Password Updated")
-          this.props.navigate("/")
-        } else {
-          alert("Invalid Credentials...")
-        }
-      }
-    constructor(props) {
-        super(props);
-        this.login=this.login.bind(this);
-        this.state = {
-            idNumber:'',
-            dateOfBirth:'',
-            passWord:'',
-            confirmPassword:''
-        };
-    }
-    
-    render() {
-      return <div className="component-first">
-        <div class="container">
-        <PageHeading/>
-        <form>
-           <div style={{marginBottom:"40px",marginTop:"30px" }}className="SubHeading">
-           <p>Trouble logging in?</p>
-           </div>
-            <div class="form-group">
-                <label style={{margin:"5px" , paddingLeft:"80px"}} for="idnumber">ID Number  </label>
-                <input type="text" id="idnumber" name="idnumber" value={this.state.idNumber} 
-                 onChange={this.changeIdNumber.bind(this)} required/>
-            </div>
-            <div class="form-group">
-               <label style={{margin:"5px" , paddingLeft:"75px"}} for="dateofbirth">Date of Birth</label>
-               <input  style={{width:"160px"}} type="date" id='dateofbirth' name='dateofbirth' value={this.state.dateOfBirth}
-                onChange={this.changeDateOfBirth.bind(this)} required/>
-            </div>
-            <div class="form-group">
-                <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">New Password  </label>
-                <input type="password" id="password" name="password" value={this.state.passWord}
-                   onChange={this.changePassword.bind(this)} required/>
-            </div>
-            <div class="form-group">
-                <label style={{margin:"5px"}} for="confirmpassword">Confirm New Password  </label>
-                <input type="text" id="confirmpassword" name="confirmpassword" value={this.state.confirmPassword} 
-                 onChange={this.changeConfirmPassword.bind(this)} required/>
-            </div>
-            <div class="form-group">
-                <button style={{backgroundColor:"#6492ea", border:"0", width:"120px", height:"25px",}} type="submit" onClick={this.login}>Reset Password</button>
-            </div>
+function ForgotPassword() {
+  const [id, setId] = useState('');
+  const [dob, setDob] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
+  const navigate = useNavigate();
 
-        </form>
-        
-         </div>
-        
-        </div>;
+  const changeid = (event) => {
+    setId(event.target.value);
+  };
+
+  const changedob = (event) => {
+    setDob(event.target.value);
+  };
+
+  const changepassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const changeConfirmpassword = (event) => {
+    setConfirmpassword(event.target.value);
+  };
+
+  const login = () => {
+    if (id=="") {
+      alert("enter a user name")
     }
+    else if (dob=="") {
+      alert("Please enter Date of Birth ")
+    }
+    else if (password=="") {
+      alert("Please enter a Password")
+    }
+    else if (confirmpassword=="") {
+    alert("Please enter a Confirm Password")
+    }
+    else if (password != confirmpassword) {
+      alert("confirm password is not matching")
+    }
+    else {
+      const formDetails = {id:id,dob:dob,password:password};
+        console.log("puting", formDetails)
+
+        axios.put('http://localhost:8080/api/v1/students/'+id, formDetails)
+          .then(function (response) {
+            alert('Password Successfully Updated');
+            navigate('/');
+            
+          })
+          .catch(function (error) {
+            alert("Invalid Credentials, Please enter valid username or date of birth");
+            console.log("try again",error);
+          });
+    }
+  };
+
+  return (
+    <div className="component-first">
+      <div className="container">
+        <PageHeading />
+        <div>
+          <div style={{ marginBottom: '40px', marginTop: '30px' }} className="SubHeading">
+            <p>Trouble logging in?</p>
+          </div>
+          <div className="form-group">
+            <label style={{ margin: '5px', paddingLeft: '80px' }} htmlFor="id">
+              ID Number
+            </label>
+            <input
+              type="text"
+              id="id"
+              name="id"
+              value={id}
+              onChange={changeid}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label style={{ margin: '5px', paddingLeft: '75px' }} htmlFor="dob">
+              Date of Birth
+            </label>
+            <input
+              style={{ width: '160px' }}
+              type="date"
+              id="dob"
+              name="dob"
+              value={dob}
+              onChange={changedob}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label style={{ margin: '5px', paddingLeft: '60px' }} htmlFor="password">
+              New password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={changepassword}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label style={{ margin: '5px' }} htmlFor="confirmpassword">
+              Confirm New password
+            </label>
+            <input
+              type="text"
+              id="confirmpassword"
+              name="confirmpassword"
+              value={confirmpassword}
+              onChange={changeConfirmpassword}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <button
+              style={{
+                backgroundColor: '#6492ea',
+                border: '0',
+                width: '120px',
+                height: '25px',
+              }}
+              type="submit"
+              onClick={login}
+            >
+              Reset password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-export default withRouter(ForgotPassword);
+
+export default ForgotPassword;
+

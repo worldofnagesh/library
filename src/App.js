@@ -31,11 +31,11 @@ function App() {
       <Route path='/forgotpassword' element={<ForgotPassword/>}/>
       <Route path='/adminlogin' element={<AdminLogin/>}/>
       <Route path='/addbook' element={<AddBook/>}/>
-      <Route path='/home'   element={<Home/>}/>
+      <Route path='/home/:id'   element={<Home/>}/>
       <Route path='/cart'   element={<Cart/>}/>
-      <Route path="/menu" element={<Menu />} />
+      <Route path="/menu/:id" element={<Menu />} />
       <Route path="/duebooks" element={<Duebooks />} />
-      <Route path="/userinfo" element={<Userinfo />} />
+      <Route path="/userinfo/:id" element={<Userinfo />} />
 
       {/* {/* <Route exact path="/recovery-password" element={<RecoveryPassword/>}/>
       <Route path="*" element={<NotFound/>}/> */}

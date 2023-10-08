@@ -1,15 +1,18 @@
-import React from "react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import React from 'react';
+import { useParams, useNavigate} from 'react-router-dom';
 
 
 function Menu() {
     const navigate = useNavigate();
+    const {id} = useParams(); 
+
+
     const duebook = () => {
       navigate('/duebooks');
     };
 
     const userinfo = () => {
-        navigate('/userinfo');
+        navigate('/userinfo/'+id);
     }
     const logout = () => {
         alert("Logout Sucessful")
