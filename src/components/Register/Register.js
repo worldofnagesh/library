@@ -11,32 +11,61 @@ function Register() {
   const [emailId, setEmailId] = useState('');
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
-  const [state, setState] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  const [validationError, setValidationError] = useState('');
+  const [isValid, setIsValid] = useState(true);
+  const [inputError, setInputError] = useState('');
+  var state = sessionStorage.getItem("statename");
 
   const changeId = (event) => {
-    setId(event.target.value);
+    const value = event.target.value;
+    setId(value);
+    const regex = /^\d{6}$/;
+    if (!regex.test(value)) {
+      setValidationError('*Please enter a six-digit number');
+    } else {
+      setValidationError('');
+    }
   };
 
   const changeFullName = (event) => {
-    setFullName(event.target.value);
+    const value = event.target.value;
+    setFullName(value);
+    const regex = /^.+$/;
+    if (regex.test(value)) {
+      setInputError('');
+    } else {
+      setInputError('*Full name should not be empty');
+    }
   }
+
   const changeEmailId = (event) => {
-    setEmailId(event.target.value);
+    const inputEmail = event.target.value;
+    setEmailId(inputEmail);
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (emailRegex.test(inputEmail)) {
+      setIsValid('');
+    } else {
+      setIsValid('* Please enter a valid email.');
+    }
   };
 
   const changeDob = (event) => {
-    setDob(event.target.value);
+    const selectedDate = new Date(event.target.value);
+    const currentDate = new Date();
+    if (selectedDate <= currentDate) {
+      setDob(event.target.value);
+    } else {
+      alert('Selected date should be less than or equal to the current date.');
+    }
   }
+
   const changeGender = (event) => {
     setGender(event.target.value);
   };
 
-  const changeState= (event) => {
-    setState(event.target.value);
-  }
   const changePassword = (event) => {
     setPassword(event.target.value);
   };
@@ -44,11 +73,11 @@ function Register() {
   const changeConfirmPassword = (event) => {
     setConfirmPassword(event.target.value);
   }
-  const handleRegister = () => {
 
+  const handleRegister = () => {
     if ((id=="" )||(id<=99999)||(id>999999)) {
         alert("enter a valid six digit Id")
-    }
+    } 
     else if (fullName=="") {
       alert("Please enter a full name")
     }
@@ -61,9 +90,9 @@ function Register() {
     else if (gender=="") {
       alert("Please select gender")
     }
-    // else if (state=="") {
-    //   alert("Please select state")
-    // }
+    else if (state=="") {
+      alert("Please select state")
+    }
     else if (password=="") {
       alert("Please enter a Password")
     }
@@ -72,6 +101,9 @@ function Register() {
     }
     else if (password != confirmpassword) {
       alert("confirm password is not matching")
+    }
+    else if ((validationError != "")||(isValid!="")||(inputError!="")) {
+      alert("Invalid Details")
     }
     else {
         const formDetails = {id:id,fullName:fullName, emailId:emailId, dob:dob, gender:gender, state:state, password:password};
@@ -102,7 +134,7 @@ function Register() {
               ID Number
             </label>
             <input
-              type="number"
+              type="text"
               id="idnumber"
               name="idnumber"
               placeholder='enter six digit roll number'
@@ -110,6 +142,9 @@ function Register() {
               onChange={changeId}
               required
             />
+            <div>
+              <p style={{fontSize:'10px' ,color:'#e62a1d',marginTop:'0',paddingLeft:"180px"}}> <div>{validationError}</div></p>
+            </div>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '65px' }} htmlFor="fullname">
@@ -123,6 +158,9 @@ function Register() {
               onChange={changeFullName}
               required
             />
+            <div>
+              <p style={{fontSize:'10px' ,color:'#e62a1d',marginTop:'0',paddingLeft:"180px"}}><div>{inputError}</div></p>
+            </div>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '100px' }} htmlFor="email">
@@ -136,6 +174,8 @@ function Register() {
               onChange={changeEmailId}
               required
             />
+            <div><p style={{fontSize:'10px' ,color:'#e62a1d',marginTop:'0',paddingLeft:"180px"}}><div >{isValid}</div>
+            </p></div>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '45px' }} htmlFor="dateofbirth">

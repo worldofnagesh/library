@@ -36,8 +36,10 @@ const StateDropdown = () => {
 
   const handleStateChange = (e) => {
     setstate(e.target.value);
-  };
+    sessionStorage.setItem("statename", state);
 
+  };
+  
   return (
     <div class="form-group">
       <label style={{margin:"5px" ,paddingLeft:"90px"}} for="state">State</label>
@@ -55,4 +57,4 @@ const StateDropdown = () => {
 };
 
 export default StateDropdown;
-{/* <label style={{margin:"5px" ,paddingLeft:"60px"}} for="password">Password  </label> */}
+

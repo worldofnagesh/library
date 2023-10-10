@@ -30,45 +30,7 @@ function Home() {
       </div>
       <hr class="line"></hr>
     </div>
-    <div class="video-grid">
-      <div class="video-preview">
-        <div class="thumbnail-row">
-          <img class="thumbnail" src={cartimage}/>
-        </div>
-        <div class="video-info-grid">
-          <div class="video-info">
-            <p class="video-title">
-              Talking Tech and AI with Google CEO Sundar Pichai!
-            </p>
-            <p class="video-author">
-              Marques Brownlee
-            </p>
-            <p class="video-stats">
-              3.4M views &#183; 6 months ago
-            </p>
-          </div>
-        </div>
-      </div>
-      </div> 
-      <div class="video-preview">
-        <div class="thumbnail-row">
-          <img class="thumbnail" src={cartimage}/>
-        </div>
-        <div class="video-info-grid">
-          <div class="video-info">
-            <p class="video-title">
-              Talking Tech and AI with Google CEO Sundar Pichai!
-            </p>
-            <p class="video-author">
-              Marques Brownlee
-            </p>
-            <p class="video-stats">
-              3.4M views &#183; 6 months ago
-            </p>
-          </div>
-        </div>
-      </div> 
-    </div>
+    </div> 
 
     
   );

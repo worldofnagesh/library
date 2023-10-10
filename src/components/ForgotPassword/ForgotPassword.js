@@ -15,7 +15,14 @@ function ForgotPassword() {
   };
 
   const changedob = (event) => {
-    setDob(event.target.value);
+    const selectedDate = new Date(event.target.value);
+    const currentDate = new Date();
+
+    if (selectedDate <= currentDate) {
+      setDob(event.target.value);
+    } else {
+      alert('Selected date should be less than or equal to the current date.');
+    }
   };
 
   const changepassword = (event) => {
@@ -46,7 +53,7 @@ function ForgotPassword() {
       const formDetails = {id:id,dob:dob,password:password};
         console.log("puting", formDetails)
 
-        axios.put('http://localhost:8080/api/v1/students/'+id+'/'+dob, formDetails)
+        axios.put('http://localhost:8080/api/v1/students/'+id, formDetails)
           .then(function (response) {
             alert('Password Successfully Updated');
             navigate('/');
