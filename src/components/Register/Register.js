@@ -17,8 +17,13 @@ function Register() {
   const [validationError, setValidationError] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [inputError, setInputError] = useState('');
-  var state = sessionStorage.getItem("statename");
+  const [validPassword, setValidPassword] = useState('');
+  const [state, setState] = useState('');
 
+  // var state = sessionStorage.getItem("statename");
+  const handleDataFromChild = (data) => {
+    setState(data);
+  };
   const changeId = (event) => {
     const value = event.target.value;
     setId(value);
@@ -67,7 +72,15 @@ function Register() {
   };
 
   const changePassword = (event) => {
-    setPassword(event.target.value);
+    // setPassword(event.target.value);
+    const inputPassword = event.target.value;
+    setPassword(inputPassword);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (passwordRegex.test(inputPassword)) {
+      setValidPassword('');
+    } else {
+      setValidPassword('*Password must be at least eight characters, including at least one uppercase letter, one lowercase letter, one number, and one special character.');
+    }
   };
 
   const changeConfirmPassword = (event) => {
@@ -102,7 +115,7 @@ function Register() {
     else if (password != confirmpassword) {
       alert("confirm password is not matching")
     }
-    else if ((validationError != "")||(isValid!="")||(inputError!="")) {
+    else if ((validationError != "")||(isValid!="")||(inputError!="")||(validPassword!="")) {
       alert("Invalid Details")
     }
     else {
@@ -213,7 +226,7 @@ function Register() {
             </label>
           </div>
           <div className="form-group">
-            <StateDropdown></StateDropdown>
+            <StateDropdown sendDataToParent={handleDataFromChild}></StateDropdown>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px', paddingLeft: '60px' }} htmlFor="password">
@@ -227,6 +240,8 @@ function Register() {
               onChange={changePassword}
               required
             />
+            <div><p style={{fontSize:'10px' ,color:'#e62a1d',marginTop:'0',paddingLeft:"180px"}}><div >{validPassword}</div>
+            </p></div>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px' }} htmlFor="state">

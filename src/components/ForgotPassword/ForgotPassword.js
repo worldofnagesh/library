@@ -8,6 +8,7 @@ function ForgotPassword() {
   const [dob, setDob] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
+  const [validPassword, setValidPassword] = useState('');
   const navigate = useNavigate();
 
   const changeid = (event) => {
@@ -26,7 +27,15 @@ function ForgotPassword() {
   };
 
   const changepassword = (event) => {
-    setPassword(event.target.value);
+    // setPassword(event.target.value);
+    const inputPassword = event.target.value;
+    setPassword(inputPassword);
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (passwordRegex.test(inputPassword)) {
+      setValidPassword('');
+    } else {
+      setValidPassword('*Password must be at least eight characters, including at least one uppercase letter, one lowercase letter, one number, and one special character.');
+    }
   };
 
   const changeConfirmpassword = (event) => {
@@ -48,6 +57,9 @@ function ForgotPassword() {
     }
     else if (password != confirmpassword) {
       alert("confirm password is not matching")
+    }
+    else if ((validPassword!="")) {
+      alert("Invalid Details")
     }
     else {
       const formDetails = {id:id,dob:dob,password:password};
@@ -113,6 +125,8 @@ function ForgotPassword() {
               onChange={changepassword}
               required
             />
+            <div><p style={{fontSize:'10px' ,color:'#e62a1d',marginTop:'0',paddingLeft:"180px"}}><div >{validPassword}</div>
+            </p></div>
           </div>
           <div className="form-group">
             <label style={{ margin: '5px' }} htmlFor="confirmpassword">
