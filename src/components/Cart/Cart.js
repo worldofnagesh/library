@@ -1,55 +1,97 @@
 import React from "react";
-import PageHeading from "../PageHeading";
-import {Routes, Route, useNavigate} from 'react-router-dom';
-
+import { useEffect, useState } from "react"
+import axios from "axios";
+import { useParams } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 function Cart() {
     const navigate = useNavigate();
 
-    const checkout = () => {
-      alert("Checkout Sucessful")
-      navigate('/');
-    };
+    const [posts, setPosts] = useState([]);
+    const { id } = useParams();
 
-  return (
-    <div class="container">
-      <PageHeading></PageHeading>
-      <form>
-      <table style={{marginLeft:"auto" , marginRight:"auto" }}>
-        <tr class="columnheading">
-            <th>Name</th>
-            <th>ID Number</th>
-            <th>Remove</th>
-            <th>Due Date</th>
-        </tr>
-        <tr>
-            <td>Megna</td>
-            <td>7334</td>
-            <td><a class="link" href=''>Del</a></td>
-            <td>1 Jan 2023</td>
-        </tr>
-        <tr>
-            <td>Kingsley</td>
-            <td>7333</td>
-            <td><a class="link" href=''>Del</a></td>
-            <td>4 feb 2023</td>
-        </tr>
-       
-        <tr>
-            <td>Sourav</td>
-            <td>7332</td>
-            <td><a class="link" href=''>Del</a></td>
-            <td>1 mar 2024</td>
-        </tr>
-    </table>
-    <div>
-    <button style={{backgroundColor:"#d1dab7", border:"0", width:"180px", height:"30px", marginTop: "50px",
-  marginbottom: "50px"}} class="checkout" type="submit" onClick={checkout}>CHECKOUT</button>
-    </div>
-    </form>
-    </div>
-  );
+
+
+  const handleDelete = (bookId) => {
+    axios.delete('http://localhost:8080/api/v1/cart/'+ bookId , 
+      ).then(() => {
+        window.location.reload(false);
+      }).catch((error) => {
+        console.log(error);
+      })
+  }
+
+  const handleDeleteAll = () => {
+    
+    {posts.map((book) => {
+      const bookToDuebooks = {
+      id:id,
+      bookId: book.bookId,
+      bookName: book.bookName,
+      dueDate: book.dueDate,
+      };
+    console.log("posting", bookToDuebooks)
+    axios.post('http://localhost:8080/api/v1/duebooks', bookToDuebooks);
+    })}
+    
+
+    axios.delete('http://localhost:8080/api/v1/cart')
+      .then((response) => {
+      alert("checkout successful")
+      navigate('/home/'+id);
+      console.log(response);    
+      if( response.status == 201){
+        console.log("valid credentials")}
+      }).catch((error) => {
+        console.log(error.response.data);
+        console.log(error);
+    })
+  }
+
+    useEffect(() => {
+      axios
+        .get("http://localhost:8080/api/v1/cart/"+id)
+        .then((result) => {
+          console.log(result.data);
+          setPosts(result.data);
+        })
+        .catch((error) => console.log(error));
+    }, []); 
+
+     
+    return (
+        <div className="container">
+        <div class="PageHeading">MAYBANK LIBRARY</div>
+        <div class="SubHeading">DUE BOOKS</div>
+        <div style={{marginRight:"10px", marginLeft:"10px"}}>
+        <table id="user" style={{marginRight:"10px"}}class="center">
+                <thead>
+              <tr>
+              <th>BookId</th>
+              <th>BookName</th>
+              <th>DueDate</th>
+          </tr>
+          </thead>
+          {posts.map((user) => {
+          return (
+          <tr>
+            <td>{user.bookId}</td>
+            <td>{user.bookName}</td>
+            <td>{user.dueDate}</td> 
+            <td><div><button onClick={()=>handleDelete(user.bookId)}>Delete</button></div></td>
+          </tr>)
+          })}
+        </table>
+        </div>
+          <br></br>
+          <br></br>
+        <div><button onClick={()=>handleDeleteAll()}>checkout</button></div>
+        </div>
+    );  
+    
+
+  
 }
 
 export default Cart;

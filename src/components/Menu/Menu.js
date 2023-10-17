@@ -8,7 +8,7 @@ function Menu() {
 
 
     const duebook = () => {
-      navigate('/duebooks');
+      navigate('/duebooks/'+id);
     };
 
     const userinfo = () => {

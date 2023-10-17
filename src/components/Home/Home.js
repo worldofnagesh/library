@@ -123,11 +123,10 @@ function Home() {
       id:id,
       bookId: book.bookId,
       bookName: book.bookName,
-      authorName: book.authorName,
       dueDate: book.dueDate,
     };
     console.log("posting", bookToAdd)
-    // axios.post('http://localhost:8080/api/v1/cart/'+id, bookToAdd);
+    axios.post('http://localhost:8080/api/v1/cart', bookToAdd);
   }
 }
   
@@ -186,36 +185,21 @@ function Home() {
           </select>
         </datalist>
 
-            {/* <button className="search-button">
-              <img className="search-icon" src={search} alt="Search" />
-            </button> */}
           </div>
           <div className="image">
-            <a href="/cart">
+            <a href={"/cart/"+id}>
               <img className="icon" src={cartimage} alt="" />
             </a>
           </div>
         </div>
         <hr className="line"></hr>
       </div>
-      {/* <div className="book-details">
-        {selectedBook && (
-          <div>
-            <h2>Book Details</h2>
-            <p>Book ID: {selectedBook.bookId}</p>
-            <p>Book Name: {selectedBook.bookName}</p>
-            <p>Author Name: {selectedBook.authorName}</p>
-            <p>Due Date: {selectedBook.dueDate}</p>
-          </div>
-        )}
-      </div> */}
       <div className="grid">
         {books.map((book) => (
         <div key={book.bookId} className="grid-item">
           <h3>{book.bookName}</h3>
           <p>Author: {book.authorName}</p>
           <p>Due Date: {book.dueDate}</p>
-          {/* <button onClick={() => addToCart(book)}>Add to Cart</button> */}
           <button className='button1'
               onClick={() => addToCart(book)}
               disabled={clickedButtons.includes(book.bookId)}

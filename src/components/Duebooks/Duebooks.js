@@ -1,32 +1,44 @@
 import React from "react";
+import { useEffect, useState } from "react"
+import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 function Duebooks() {
+  
+  const { id } = useParams();
+  const [dbpost, setDbposts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/duebooks/"+id)
+      .then((result) => {
+        console.log(result.data);
+        setDbposts(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, []); 
+
   return (
     <div className="container">
       <div class="PageHeading">MAYBANK LIBRARY</div>
       <div class="SubHeading">DUE BOOKS</div>
+      <div style={{marginRight:"10px", marginLeft:"10px"}}>
       <table style={{marginRight:"10px"}}class="center">
         <tr>
             <th>Name</th>
             <th>ID Number</th>
             <th>Due Date</th>
         </tr>
-        <tr>
-            <td>Megna</td>
-            <td>7334</td>
-            <td>1 Jan 2023</td>
-        </tr>
-        <tr>
-            <td>Kingsley</td>
-            <td>7333</td>
-            <td>4 feb 2023</td>
-        </tr>
-        <tr>
-            <td>Sourav</td>
-            <td>7332</td>
-            <td>1 mar 2024</td>
-        </tr>
-    </table>
+        {dbpost.map((book) => {
+          return (
+          <tr>
+            <td>{book.bookId}</td>
+            <td>{book.bookName}</td>
+            <td>{book.dueDate}</td> 
+        </tr>)
+        })}
+      </table>
+      </div>
     </div>
   );
 }
