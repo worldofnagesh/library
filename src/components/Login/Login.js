@@ -96,10 +96,10 @@ function Login() {
               Don't have an account?
               <a className="link" href="http://localhost:3000/register"><u>Register</u></a>
             </div>
-            {/* <div className="form-group2">
+            <div className="form-group2">
               Admin?
               <a href="http://localhost:3000/adminlogin" className="link"><u>Login</u></a>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
