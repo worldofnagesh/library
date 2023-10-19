@@ -63,7 +63,7 @@ function Cart() {
     return (
         <div className="container">
         <div class="PageHeading">MAYBANK LIBRARY</div>
-        <div class="SubHeading">DUE BOOKS</div>
+        <div class="SubHeading">CART</div>
         <div style={{marginRight:"10px", marginLeft:"10px"}}>
         <table id="user" style={{marginRight:"10px"}}class="center">
                 <thead>

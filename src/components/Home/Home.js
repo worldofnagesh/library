@@ -1,114 +1,21 @@
-// import {Routes, Route, useNavigate} from 'react-router-dom';
-// import PageHeading from "../PageHeading";
-// import menuimage from '../Images/icons8-menu-50.png'
-// import cartimage from '../Images/icons8-buying-50.png'
-// import search from '../Images/search.svg'
-// import { useParams } from 'react-router-dom';
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// // import { styled } from '@mui/material/styles';
-// // import Grid from '@mui/material/Unstable_Grid2';
-// // import Paper from '@mui/material/Paper';
-
-// function Home() {
-
-//     const {id} = useParams();
-//     const [books, setBooks] = useState([]);
-//     const [searchTerm, setSearchTerm] = useState('');
-//     const [selectedBook, setSelectedBook] = useState('');
-
-
-//   const handleSelectedBook = (e) => {
-//     const selected = e.target.value;
-//     console.log(selected);
-//     setSelectedBook(selected);
-//     console.log(selectedBook);
-//   };
-
-//     useEffect(() => {
-//       const fetchBooks = async () => {
-//         try {
-//           const response = await axios.get(`http://localhost:8080/api/v1/books?name=${searchTerm}`);
-//           setBooks(response.data);
-//           // console.log(response.data);
-//         } catch (error) {
-//           console.error('Error fetching books:', error);
-//         }
-//       };
-
-//       fetchBooks();
-//     }, [searchTerm]);
-    
-
-//   return (
-//     <div class="container1">
-//     <div class="header1"> 
-//       <div>
-//         <div className="text-pageheading">MAYBANK LIBRARY</div>
-//       </div>
-//       <hr class="line"></hr>
-//       <div class="secondheading">
-//         <div class="image"><a href={"/menu/"+id}  ><img class="icon" src={menuimage} alt="" /></a></div>
-//       <div class="middle-section">
-//           <input
-//             class="search-bar"
-//             type="text"
-//             placeholder="Search by book name"
-//             value={searchTerm}
-//             onChange={(e) => setSearchTerm(e.target.value)}
-//             list='bookNames'
-//           />
-//           <datalist id="bookNames" onOptionChange = {handleSelectedBook}  >
-//             <select>
-//             <option value=""></option>
-//             {books.map((book) => (
-//             <option key={book.bookId} value={book.bookName}></option>
-//               ))}
-//             </select>
-//           </datalist>
-          
-//             <button class="search-button">
-//                 <img class="search-icon" src={search}/>
-//             </button>
-//         </div>
-//         <div class="image"><a href="/cart" ><img class="icon" src={cartimage} alt="" /></a></div>
-//       </div>
-//       <hr class="line"></hr>
-//     </div>
-//     {/* <div>
-//         {selectedBook && (
-//         <div>
-//           <h2>Book Details</h2>
-//           <p>Book ID: {selectedBook.bookId}</p>
-//           <p>Book Name: {selectedBook.bookName}</p>
-//           <p>Author Name: {selectedBook.authorName}</p>
-//           <p>Due Date: {selectedBook.dueDate}</p>
-//         </div>
-//       )}
-//     </div> */}
-//     <br></br>
-     
-//     </div> 
-
-    
-//   );
-// }
-
-// export default Home;
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import menuimage from '../Images/icons8-menu-50.png'
 import cartimage from '../Images/icons8-buying-50.png'
-import search from '../Images/search.svg'
-
 function Home() {
   const { id } = useParams();
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
   const [clickedButtons, setClickedButtons] = useState([]);
+
+  const numberOfImages = 10;
+
+  const images = Array.from({ length: numberOfImages }, (_, index) => {
+    const imageNumber = index + 1;
+    return require(`../Images/${imageNumber}.jpg`);
+  });
 
   const handleSelectedBook = () => {
     const selected = document.querySelector('.search-bar').value;
@@ -198,6 +105,7 @@ function Home() {
         {books.map((book) => (
         <div key={book.bookId} className="grid-item">
           <h3>{book.bookName}</h3>
+          <img className="bookImages" src={images[book.bookId-1]} alt={''} />
           <p>Author: {book.authorName}</p>
           <p>Due Date: {book.dueDate}</p>
           <button className='button1'
